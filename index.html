@@ -1,0 +1,363 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Jeff Taylor</title>
+<meta name="description" content="Jeff Taylor: applied AI and telecom networks. Builds, results and contact.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@75..100,500..800&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: left-aligned single column, wide build grid; telecom "site list" feel through mono tags and status pills */
+:root {
+  --bg: #f3f5f6;
+  --surface: #ffffff;
+  --ink: #13212b;
+  --muted: #55636d;
+  --line: #d7dde1;
+  --accent: #1d5fb4;      /* signal blue */
+  --money: #9a5b00;       /* amber for the money angle */
+  --money-bg: #fbf1e0;
+  --chip-bg: #e6ecf1;
+  --ok: #1d7a4a;
+  --font-display: "Archivo", "Arial Narrow", system-ui, sans-serif;
+  --font-body: "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0f171d; --surface: #16222b; --ink: #e4ebef; --muted: #9aa9b3; --line: #2a3a45;
+    --accent: #6ea8f0; --money: #f0b45a; --money-bg: #2c2312; --chip-bg: #1f2f3a; --ok: #5fc48f;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0f171d; --surface: #16222b; --ink: #e4ebef; --muted: #9aa9b3; --line: #2a3a45;
+  --accent: #6ea8f0; --money: #f0b45a; --money-bg: #2c2312; --chip-bg: #1f2f3a; --ok: #5fc48f;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body {
+  background: var(--bg); color: var(--ink);
+  font: 16px/1.6 var(--font-body);
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  padding-block: 0 64px;
+}
+.wrap { max-width: 1120px; margin: 0 auto; }
+a { color: var(--accent); text-underline-offset: 3px; }
+a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+h1, h2, h3 { font-family: var(--font-display); text-wrap: balance; margin: 0; }
+.mono { font-family: var(--font-mono); }
+
+nav.top { display: flex; flex-wrap: wrap; gap: 8px 24px; align-items: baseline; justify-content: space-between; padding-block: 20px; border-bottom: 1px solid var(--line); }
+nav.top .name { font-family: var(--font-display); font-weight: 800; font-size: 1.15rem; letter-spacing: .01em; color: var(--ink); text-decoration: none; }
+nav.top ul { list-style: none; display: flex; flex-wrap: wrap; gap: 4px 20px; margin: 0; padding: 0; font-size: .95rem; }
+nav.top ul a { color: var(--muted); text-decoration: none; }
+nav.top ul a:hover { color: var(--ink); }
+
+header.hero { padding-block: 56px 40px; display: grid; gap: 20px; max-width: 820px; }
+.eyebrow { font-family: var(--font-mono); font-size: .8rem; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+.hero h1 { font-size: clamp(2.1rem, 5.2vw, 3.6rem); font-stretch: 82%; font-weight: 800; line-height: 1.04; letter-spacing: -.01em; }
+.hero h1 em { font-style: normal; color: var(--accent); }
+.hero p { font-size: 1.12rem; color: var(--muted); max-width: 62ch; margin: 0; }
+.hero .links { display: flex; flex-wrap: wrap; gap: 10px; }
+.btn { display: inline-block; padding: 9px 16px; border: 1px solid var(--line); border-radius: 6px; text-decoration: none; color: var(--ink); background: var(--surface); font-weight: 500; font-size: .95rem; }
+.btn.primary { background: var(--accent); border-color: var(--accent); color: var(--bg); }
+
+.facts { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); border-block: 1px solid var(--line); margin-block: 8px 0; }
+.facts div { padding: 18px 16px 18px 0; display: grid; gap: 2px; }
+.facts div + div { padding-left: 16px; border-left: 1px solid var(--line); }
+.facts b { font-family: var(--font-display); font-size: 1.9rem; font-stretch: 82%; font-weight: 700; font-variant-numeric: tabular-nums; }
+.facts span { font-size: .88rem; color: var(--muted); }
+
+section { padding-block: 56px 8px; }
+.sec-head { display: grid; gap: 8px; margin-bottom: 24px; max-width: 760px; }
+.sec-head h2 { font-size: clamp(1.6rem, 3.2vw, 2.2rem); font-stretch: 85%; font-weight: 750; }
+.sec-head p { margin: 0; color: var(--muted); }
+
+.filters { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 20px; }
+.filters button { font: 500 .85rem var(--font-mono); padding: 6px 12px; border-radius: 999px; border: 1px solid var(--line); background: var(--surface); color: var(--muted); cursor: pointer; }
+.filters button[aria-pressed="true"] { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+.count { font-family: var(--font-mono); font-size: .85rem; color: var(--muted); margin: 0 0 12px; }
+
+.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 330px), 1fr)); gap: 16px; }
+.card { background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 20px; display: grid; grid-template-rows: auto auto 1fr auto; gap: 12px; min-width: 0; }
+.card .head { display: flex; justify-content: space-between; align-items: start; gap: 12px; }
+.card h3 { font-size: 1.25rem; font-stretch: 88%; font-weight: 700; line-height: 1.2; }
+.pill { flex: none; font: 500 .72rem var(--font-mono); letter-spacing: .04em; text-transform: uppercase; padding: 3px 8px; border-radius: 4px; background: var(--chip-bg); color: var(--muted); white-space: nowrap; }
+.pill.public { color: var(--ok); }
+.card dl { margin: 0; display: grid; gap: 8px; font-size: .95rem; }
+.card dt { font: 500 .72rem var(--font-mono); letter-spacing: .06em; text-transform: uppercase; color: var(--muted); }
+.card dd { margin: 0; }
+.card .money { background: var(--money-bg); border-radius: 6px; padding: 8px 10px; }
+.card .money dt { color: var(--money); }
+.tags { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
+.tags span { font: .75rem var(--font-mono); color: var(--muted); border: 1px solid var(--line); border-radius: 4px; padding: 1px 6px; }
+.tags a { margin-left: auto; font-size: .9rem; font-weight: 500; }
+
+.stories { display: grid; gap: 0; border-top: 1px solid var(--line); }
+.story { display: grid; grid-template-columns: minmax(0, 220px) minmax(0, 1fr); gap: 12px 32px; padding-block: 28px; border-bottom: 1px solid var(--line); }
+.story .meta { display: grid; gap: 4px; align-content: start; }
+.story .meta b { font-family: var(--font-display); font-size: 1.05rem; font-stretch: 88%; }
+.story .meta span { font-size: .88rem; color: var(--muted); }
+.story h3 { font-size: 1.35rem; font-stretch: 88%; font-weight: 700; margin-bottom: 10px; }
+.story .body { max-width: 68ch; min-width: 0; }
+.story .body p { margin: 0 0 10px; }
+.story .result { display: flex; gap: 10px; align-items: baseline; font-size: .95rem; }
+.story .result b { font: 500 .72rem var(--font-mono); letter-spacing: .06em; text-transform: uppercase; color: var(--money); flex: none; }
+
+.about { display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr); gap: 32px; }
+.about p { margin: 0 0 12px; max-width: 64ch; }
+.contact { background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 20px; display: grid; gap: 12px; align-content: start; }
+.contact div { display: grid; gap: 2px; }
+.contact dt { font: 500 .72rem var(--font-mono); letter-spacing: .06em; text-transform: uppercase; color: var(--muted); }
+.contact dd { margin: 0; user-select: all; overflow-wrap: anywhere; }
+.timeline { list-style: none; padding: 0; margin: 16px 0 0; display: grid; gap: 6px; font-size: .95rem; }
+.timeline li { display: grid; grid-template-columns: 7.5rem minmax(0, 1fr); gap: 12px; }
+.timeline .yr { font-family: var(--font-mono); font-size: .85rem; color: var(--muted); font-variant-numeric: tabular-nums; }
+footer { margin-top: 56px; padding-top: 20px; border-top: 1px solid var(--line); font-size: .85rem; color: var(--muted); }
+
+@media (max-width: 760px) {
+  .facts { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .facts div:nth-child(3) { padding-left: 0; border-left: 0; }
+  .facts div:nth-child(n+3) { border-top: 1px solid var(--line); }
+  .story, .about { grid-template-columns: minmax(0, 1fr); }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .card { transition: border-color .15s; }
+  .card:hover { border-color: var(--accent); }
+}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <nav class="top" aria-label="Main">
+    <a class="name" href="#top">Jeff Taylor</a>
+    <ul>
+      <li><a href="#builds">Builds</a></li>
+      <li><a href="#stories">Results</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="https://github.com/jefftaylor-code">GitHub</a></li>
+    </ul>
+  </nav>
+
+  <header class="hero" id="top">
+    <span class="eyebrow">Applied AI · Telecom networks · Delivery</span>
+    <h1>I build systems that turn complex data into decisions that <em>pay back</em>.</h1>
+    <p>30+ years across operators, vendors and consultancies, from RF engineering on live 5G networks to owning a regional services P&amp;L. Today I build hands-on with AI agents, and I measure what they produce.</p>
+    <div class="links">
+      <a class="btn primary" href="#builds">See what I've built</a>
+      <a class="btn" href="https://www.linkedin.com/in/jeff-taylor-tech">LinkedIn</a>
+    </div>
+  </header>
+
+  <div class="facts" role="list">
+    <div role="listitem"><b>30+</b><span>years in telecom</span></div>
+    <div role="listitem"><b>~1,100</b><span>live 5G SA sites led</span></div>
+    <div role="listitem"><b id="build-count">14</b><span>builds and collaborations</span></div>
+    <div role="listitem"><b>4</b><span>regions worked</span></div>
+  </div>
+
+  <section id="builds" aria-labelledby="builds-h">
+    <div class="sec-head">
+      <h2 id="builds-h">Everything I've built</h2>
+      <p>Each build names the problem, what I made, and where the money is: revenue won, cost avoided, time saved or risk reduced. Prototypes are called prototypes.</p>
+    </div>
+    <div class="filters" id="filters" role="group" aria-label="Filter builds"></div>
+    <p class="count" id="count" aria-live="polite"></p>
+    <div class="grid" id="grid"></div>
+  </section>
+
+  <section id="stories" aria-labelledby="stories-h">
+    <div class="sec-head">
+      <h2 id="stories-h">Results from the field</h2>
+      <p>Customer names and internal figures stay confidential. Numbers are rounded or given as ranges.</p>
+    </div>
+    <div class="stories">
+      <article class="story">
+        <div class="meta"><b>Huawei Technologies</b><span>Telecommunication Solutions Advisor · 2015–2019</span><span>Manila and Jakarta</span></div>
+        <div class="body">
+          <h3>A 40-site pilot that became a national programme</h3>
+          <p>I secured the first APAC contract for Huawei's RF planning services, opening a new revenue stream for that portfolio in the region. Separately, I led a 40-site optimisation pilot for an operator, then turned its results into the business case for a national programme.</p>
+          <div class="result"><b>Result</b><span>A national services programme estimated at over $2M. Throughput in the pilot cluster was reported internally as up by more than a fifth, and the customer deferred an estimated few hundred thousand dollars of capacity spend.</span></div>
+        </div>
+      </article>
+      <article class="story">
+        <div class="meta"><b>Capgemini, for Globe Telecom</b><span>Manager, Telecommunications Engineering and Business Transformation · 2019–2021</span><span>Manila, on site</span></div>
+        <div class="body">
+          <h3>Holding a four-party OSS/BSS transformation together</h3>
+          <p>I directed a team of about 40 across architecture, software, integration, testing and operating-model change, and chaired the biweekly steering between the operator and three technology vendors. My job was to turn ambiguity into owners, interfaces, risks and decisions.</p>
+          <div class="result"><b>Value</b><span>Fewer stalls between vendors on a transformation where every month of delay costs the operator money.</span></div>
+        </div>
+      </article>
+      <article class="story">
+        <div class="meta"><b>Boost Mobile (DISH Wireless)</b><span>RF Engineering Manager · 2022–2025</span><span>Seattle and the Pacific Northwest</span></div>
+        <div class="body">
+          <h3>Running RF engineering on a greenfield cloud-native 5G network</h3>
+          <p>I led RF engineering across about 1,100 live 5G standalone O-RAN sites, ran migrations totalling 532 sites, and managed a team of five engineers. I turned KPI, alarm and field evidence into prioritised fixes and executive decisions, and built an AI-assisted assurance workflow (Sheldon) on my own initiative.</p>
+          <div class="result"><b>Value</b><span>Network quality that subscribers pay for, on a multi-vendor, cloud-native network.</span></div>
+        </div>
+      </article>
+      <article class="story">
+        <div class="meta"><b>AIRCOM International</b><span>APAC Delivery Manager / Consulting Director · 2009–2011</span><span>Singapore</span></div>
+        <div class="body">
+          <h3>Owning a regional services P&amp;L</h3>
+          <p>I owned services delivery and the P&amp;L across Asia-Pacific: about 60 projects worth tens of millions of dollars, with a regional organisation supporting several hundred engineers across planning, optimisation and modernisation.</p>
+          <div class="result"><b>Value</b><span>Revenue delivered on time and recovered when projects slipped, across several countries at once.</span></div>
+        </div>
+      </article>
+      <article class="story">
+        <div class="meta"><b>ExaGen Solutions</b><span>Vice President of Business Development · 2021–2022</span><span>United States</span></div>
+        <div class="body">
+          <h3>Turning customer needs into priced, winnable proposals</h3>
+          <p>I drove go-to-market for B2B telecom and AI-enabled services across the U.S. and Canada, and secured pilots with two Tier-1 carriers. I turned customer requirements for private wireless, DAS, E911 and network-performance work into scope, acceptance criteria, proposals and statements of work.</p>
+          <div class="result"><b>Value</b><span>Pilots with two Tier-1 carriers, the first step to recurring services revenue.</span></div>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <section id="about" aria-labelledby="about-h">
+    <div class="sec-head"><h2 id="about-h">About</h2></div>
+    <div class="about">
+      <div>
+        <p>I started in RF engineering and moved through operator, vendor and consulting roles in North America, Europe, Africa and Asia-Pacific. Along the way I ran delivery, sold and scoped work, and owned a P&amp;L.</p>
+        <p>Since 2025 I've been building hands-on with AI: agents, RAG, MCP tools and evaluation. I'm also the founder of Calivect, a managed job-search service built by AI agents under my direction. I care about measuring what AI produces, not just demoing it.</p>
+        <ul class="timeline" aria-label="Recent roles">
+          <li><span class="yr">2026–now</span><span>AI Evaluation Engineer (contract) · G2i (via HireArt)</span></li>
+          <li><span class="yr">2026–now</span><span>Founder · Calivect</span></li>
+          <li><span class="yr">2022–2025</span><span>RF Engineering Manager · Boost Mobile (DISH Wireless)</span></li>
+          <li><span class="yr">2021–2022</span><span>Vice President of Business Development · ExaGen Solutions</span></li>
+          <li><span class="yr">2019–2021</span><span>Manager, Telecom Engineering and Business Transformation · Capgemini</span></li>
+          <li><span class="yr">2015–2019</span><span>Telecommunication Solutions Advisor · Huawei Technologies</span></li>
+          <li><span class="yr">2009–2011</span><span>APAC Consulting Director · AIRCOM International</span></li>
+        </ul>
+        <p style="margin-top:16px">Learning: Outskill GenAI Accelerator (completed Nov 2025), AI Engineering Accelerator (completed Apr 2026), AI Engineering Fellowship (ongoing).</p>
+      </div>
+      <dl class="contact">
+        <div><dt>Email</dt><dd>jefferyataylor@gmail.com</dd></div>
+        <div><dt>LinkedIn</dt><dd><a href="https://www.linkedin.com/in/jeff-taylor-tech">linkedin.com/in/jeff-taylor-tech</a></dd></div>
+        <div><dt>GitHub</dt><dd><a href="https://github.com/jefftaylor-code">github.com/jefftaylor-code</a></dd></div>
+        <div><dt>Based in</dt><dd>Kirkland, WA · open to travel and relocation</dd></div>
+      </dl>
+    </div>
+  </section>
+
+  <footer>© 2026 Jeff Taylor · Customer and employer details are kept confidential.</footer>
+</div>
+
+<script>
+const BUILDS = [
+  { name: "Calivect", status: "Pilot", tags: ["AI agents", "Product", "Evaluation"],
+    problem: "Job seekers lose months to thin searches and generic CVs.",
+    built: "A managed job-search service built by AI coding agents under my direction: one agent builds, another reviews, I decide and merge. Includes a searched / partial / blocked coverage ledger, structured job-description triage and a CV playbook with fixed Word templates.",
+    money: "A priced service I run end to end as founder and product owner. More than 85 pull requests shipped.",
+    link: null },
+  { name: "Job-lead quality audit", status: "Research", tags: ["Data quality", "Evaluation"],
+    problem: "A big lead count can hide how few leads are real, readable jobs.",
+    built: "Sampled 200 stored job leads and traced each one: fetched, readable, a real single vacancy, or not. Separately, checked 15 search links by hand.",
+    money: "Only 45 of 200 leads gave a readable job description, and 11 of 15 links were already dead. Measuring before spending changed the build plan.",
+    link: null },
+  { name: "Requirement-to-evidence matcher", status: "Design", tags: ["AI agents", "Evaluation"],
+    problem: "Keyword matching misreads both people and jobs.",
+    built: "Structured job and candidate records: each requirement keeps its source quote and level, and links to specific evidence. Missing evidence becomes a question, not a rejection.",
+    money: "Better-qualified shortlists and fewer wasted applications.",
+    link: null },
+  { name: "Sheldon", status: "Concept", tags: ["Telecom", "AI agents"],
+    problem: "Engineers lose hours tying outages to alarms, topology and KPIs.",
+    built: "An AI-assisted network-assurance workflow that correlated outages, alarms, topology, geography and KPIs, ranked service impact, recommended triage through an LLM layer, and automated reporting. Engineers kept the decision. The original stayed with the employer; a fresh demo on synthetic data is planned.",
+    money: "Faster restoration and less engineer time per incident.",
+    link: null },
+  { name: "Governed 5G change tools (MCP)", status: "Prototype", tags: ["MCP", "Telecom", "Python"],
+    problem: "AI agents need safe, typed access to engineering tools.",
+    built: "Python FastMCP tools with Pydantic contracts, deterministic reason codes, PASS/FAIL outputs, fail-closed handling, MCP Inspector checks and a 16-test pytest suite.",
+    money: "Lets automation touch network changes without letting it guess.",
+    link: null },
+  { name: "Deep research assistant", status: "Prototype", tags: ["AI agents", "RAG", "LangGraph"],
+    problem: "Research across documents, the web and papers takes analysts days.",
+    built: "A LangGraph-style assistant: retrieval from documents, web and arXiv, then synthesis, red-team critique, gap-filling and confidence scoring.",
+    money: "Analyst hours saved per question.",
+    link: null },
+  { name: "Agentic RAG app", status: "Public code", tags: ["RAG", "AI agents", "Python"],
+    problem: "Answer questions from a PDF, and fall back to the web when the PDF can't.",
+    built: "Streamlit app: FAISS and Hugging Face embeddings for the document, then a LangChain ReAct agent choosing Wikipedia, Tavily or arXiv.",
+    money: "Support and knowledge-base deflection.",
+    link: "https://github.com/jefftaylor-code/agentic-rag" },
+  { name: "Network Intelligence Lab", status: "Public code", tags: ["Telecom", "Python"],
+    problem: "Find network trouble spots fast in KPI data.",
+    built: "KPI hotspot detection and an anomaly-detection notebook.",
+    money: "Points engineering spend at the worst sites first.",
+    link: "https://github.com/jefftaylor-code/network-intelligence-lab" },
+  { name: "Workflow automations", status: "Prototype", tags: ["Automation", "AI agents"],
+    problem: "Repetitive inbox and spreadsheet work.",
+    built: "n8n, Gmail, Google Sheets and API workflows with LLM classification, de-duplication, routing, data-quality gates and human approval.",
+    money: "Hours saved every week, with a person still approving.",
+    link: null },
+  { name: "Venture Lab", status: "Private", tags: ["Product", "AI agents"],
+    problem: "Choosing a business on enthusiasm instead of evidence.",
+    built: "An evidence-first system for testing small businesses: stage gates, spend limits, and an AI review council (a sceptical CFO, a growth scientist, a customer researcher).",
+    money: "Revenue first: sell before building, stop when the evidence says stop.",
+    link: null },
+  { name: "Missed-call lead recovery", status: "Experiment", tags: ["Automation", "Product"],
+    problem: "Local service businesses lose customers when calls go unanswered.",
+    built: "A managed service design that texts missed callers within seconds and routes replies, using existing phone and CRM tools.",
+    money: "Recovers revenue the business is already losing.",
+    link: null },
+  { name: "Iron Log", status: "Public code", tags: ["Product"],
+    problem: "Logging workouts on a phone is slow.",
+    built: "An installable one-file web app that saves sets to Google Sheets.",
+    money: "Built because I wanted it. That's the habit.",
+    link: "https://github.com/jefftaylor-code/iron-log" },
+  { name: "AI adoption workshops", status: "Collaboration", tags: ["Evaluation", "Telecom"],
+    problem: "Engineering teams not using AI tools they already had.",
+    built: "Workshops, playbooks and quizzes for engineering teams.",
+    money: "Adoption across a team, not one enthusiast.",
+    link: null },
+  { name: "Capacity forecasting app", status: "Earlier work", tags: ["Telecom"],
+    problem: "Network capacity planning done by hand.",
+    built: "An end-to-end capacity analysis and forecasting application (Visual Basic, SQL, Access, Excel), built alongside Nokia's software developers.",
+    money: "Better-timed capacity spend.",
+    link: null }
+];
+
+const grid = document.getElementById("grid");
+const filters = document.getElementById("filters");
+const count = document.getElementById("count");
+document.getElementById("build-count").textContent = BUILDS.length;
+
+const ALL = "All";
+const tagOrder = [ALL, ...Array.from(new Set(BUILDS.flatMap(b => b.tags)))];
+let active = ALL;
+
+function esc(s) { return String(s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" })[c]); }
+
+function render() {
+  const shown = BUILDS.filter(b => active === ALL || b.tags.includes(active));
+  count.textContent = active === ALL ? `${shown.length} builds` : `${shown.length} of ${BUILDS.length} builds tagged ${active}`;
+  grid.innerHTML = shown.map(b => `
+    <article class="card">
+      <div class="head"><h3>${esc(b.name)}</h3><span class="pill${b.status === "Public code" ? " public" : ""}">${esc(b.status)}</span></div>
+      <dl>
+        <div><dt>Problem</dt><dd>${esc(b.problem)}</dd></div>
+        <div><dt>What I built</dt><dd>${esc(b.built)}</dd></div>
+      </dl>
+      <dl><div class="money"><dt>Money angle</dt><dd>${esc(b.money)}</dd></div></dl>
+      <div class="tags">${b.tags.map(t => `<span>${esc(t)}</span>`).join("")}${b.link ? `<a href="${esc(b.link)}">Code →</a>` : ""}</div>
+    </article>`).join("");
+  for (const btn of filters.querySelectorAll("button")) btn.setAttribute("aria-pressed", String(btn.dataset.tag === active));
+}
+
+filters.innerHTML = tagOrder.map(t => `<button type="button" data-tag="${esc(t)}" aria-pressed="false">${esc(t)}</button>`).join("");
+filters.addEventListener("click", e => {
+  const btn = e.target.closest("button");
+  if (!btn) return;
+  active = btn.dataset.tag;
+  render();
+});
+render();
+</script>
+</body>
+</html>
