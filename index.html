@@ -8,7 +8,7 @@
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://jefferyataylor.com/">
 <meta property="og:title" content="Jeff Taylor: I build systems that turn complex data into decisions that pay back">
-<meta property="og:description" content="Applied AI and telecom networks. 15 builds and collaborations, with the problem, what I built and the money angle for each.">
+<meta property="og:description" content="Applied AI and telecom networks. Builds and collaborations, each with the problem, what I built and the money angle.">
 <meta property="og:image" content="https://jefferyataylor.com/og-image.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="627">
@@ -165,7 +165,7 @@ footer { margin-top: 56px; padding-top: 20px; border-top: 1px solid var(--line);
   <div class="facts" role="list">
     <div role="listitem"><b>30+</b><span>years in telecom</span></div>
     <div role="listitem"><b>~1,100</b><span>live 5G SA sites led</span></div>
-    <div role="listitem"><b id="build-count">15</b><span>builds and collaborations</span></div>
+    <div role="listitem"><b id="build-count">16</b><span>builds and collaborations</span></div>
     <div role="listitem"><b>4</b><span>regions worked</span></div>
   </div>
 
@@ -314,6 +314,11 @@ const BUILDS = [
     built: "Five expert personas on a local model (Ollama, no cloud) debate in two rounds, a chair writes the verdict, and a rule-based auditor checks the chair: every consensus claim must name its supporters, and inferred support is rejected.",
     money: "Decisions stress-tested from several angles at zero API cost, with an audit that catches overstated consensus.",
     link: "https://github.com/jefftaylor-code/council-of-experts" },
+  { name: "Avery, persistent AI character", status: "Prototype", tags: ["AI agents", "Product", "Python"],
+    problem: "Chat assistants forget people between sessions, or mix up whose facts are whose.",
+    built: "A browser chat character with a fixed persona in Markdown files, a FastAPI backend on the OpenAI API, and per-user SQLite memory that is extracted after each message and used in later sessions. A regression test proves memories survive a restart and never cross between users.",
+    money: "Continuity is what makes people come back. Gated tests set the next fix (duplicate memories) before any new features.",
+    link: null },
   { name: "Missed-call lead recovery", status: "Experiment", tags: ["Automation", "Product"],
     problem: "Local service businesses lose customers when calls go unanswered.",
     built: "A managed service design that texts missed callers within seconds and routes replies, using existing phone and CRM tools.",
